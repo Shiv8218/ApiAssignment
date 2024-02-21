@@ -149,8 +149,20 @@ describe('API Testing',()=>{
           expect(response.body).to.have.property("error");
         });
       });
+
+      it('16. POST Request: Register Unsuccessful <Using Symbols>', () => {
+        const newUser = {
+          email: ApiData.symbol,
+          password:ApiData.symbol
+        };
     
-    it('16. POST Request: Login User Success', () => {
+        methodObj.registerUser(newUser).then((response) => {
+          expect(response.status).to.eq(400);
+          expect(response.body).to.have.property("error");
+        });
+      });
+    
+    it('17. POST Request: Login User Success', () => {
         const userToLogin = {
           email: ApiData.email,
           password: ApiData.password,
@@ -161,7 +173,7 @@ describe('API Testing',()=>{
         });
       });
       
-    it('17. POST Request: Login User Rejected <Without password>', () => {
+    it('18. POST Request: Login User Rejected <Without password>', () => {
         const userToLogin = {
           email: ApiData.email,
         };
@@ -173,7 +185,7 @@ describe('API Testing',()=>{
         });
       });
 
-      it('18. POST Request: Login User Rejected <Without email>', () => {
+    it('19. POST Request: Login User Rejected <Without email>', () => {
         const userToLogin = {
           password: ApiData.password,
         };
@@ -185,7 +197,7 @@ describe('API Testing',()=>{
         });
       });
 
-      it('19. POST Request: Login User Rejected <Without any details>', () => {
+    it('20. POST Request: Login User Rejected <Without any details>', () => {
         const userToLogin = {};
     
         methodObj.loginUser(userToLogin).then((response) => {
@@ -195,9 +207,22 @@ describe('API Testing',()=>{
         });
       });
 
+    it('21. POST Request: Login User Rejected <Using Symbols>', () => {
+        const userToLogin = {
+          email: ApiData.symbol,
+          password:ApiData.symbol
+        };
+    
+        methodObj.loginUser(userToLogin).then((response) => {
+          expect(response.status).to.eq(400);
+          expect(response.body).to.have.property("error");
+    
+        });
+      });
+
       
     
-    it('20. GET Request: Get Users with Delay', () => {
+    it('22. GET Request: Get Users with Delay', () => {
         const delaySeconds = ApiData.delaySeconds;
     
         methodObj.getUsersWithDelay(delaySeconds).then((response) => {
@@ -206,5 +231,6 @@ describe('API Testing',()=>{
       });
 
 
+      
 })
 

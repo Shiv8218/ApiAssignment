@@ -1,0 +1,312 @@
+{
+	"test_plan_name": "API Testing",
+	"tests": [
+		{
+			"test_number": 1,
+			"test_description": "GET Request: List Users on Page 2",
+			"request_type": "GET",
+			"endpoint": "/users?page=2",
+			"expected_status_code": 200,
+			"expected_response_body": {
+				"page": "ApiData.pageID"
+			}
+		},
+		{
+			"test_number": 2,
+			"test_description": "GET Request: Get User by ID",
+			"request_type": "GET",
+			"endpoint": "/users/{userId}",
+			"url_parameters": {
+				"userId": "ApiData.pageID"
+			},
+			"expected_status_code": 200,
+			"expected_response_body": {
+				"id": "ApiData.pageID"
+			}
+		},
+		{
+			"test_number": 3,
+			"test_description": "GET Request: Get user by ID which is not present in database",
+			"request_type": "GET",
+			"endpoint": "/users/{invalidId}",
+			"url_parameters": {
+				"invalidId": "ApiData.invalidID"
+			},
+			"expected_status_code": 404
+		},
+		{
+			"test_number": 4,
+			"test_description": "GET Request: Get List of Unknown Data",
+			"request_type": "GET",
+			"endpoint": "/unknown",
+			"expected_status_code": 200,
+			"expected_response_body": {
+				"data": {
+					"$exists": true,
+					"$gt": 0
+				}
+			}
+		},
+		{
+			"test_number": 5,
+			"test_description": "GET Request: Get single user from Unknown Data",
+			"request_type": "GET",
+			"endpoint": "/unknown/{userId}",
+			"url_parameters": {
+				"userId": "ApiData.unknownValidID"
+			},
+			"expected_status_code": 200,
+			"expected_response_body": {
+				"data": {
+					"id": "ApiData.unknownValidID"
+				}
+			}
+		},
+		{
+			"test_number": 6,
+			"test_description": "GET Request: Get Unknown Data by ID which is not present in database",
+			"request_type": "GET",
+			"endpoint": "/unknown/{unknownId}",
+			"url_parameters": {
+				"unknownId": "ApiData.unknownInValidID"
+			},
+			"expected_status_code": 404,
+			"expected_response_body": {
+				"data": null
+			}
+		},
+		{
+			"test_number": 7,
+			"test_description": "POST Request: Create User",
+			"request_type": "POST",
+			"endpoint": "/users",
+			"request_body": {
+				"name": "ApiData.name",
+				"job": "ApiData.job"
+			},
+			"expected_status_code": 201,
+			"expected_response_body": {
+				"name": "ApiData.name",
+				"job": "ApiData.job"
+			}
+		},
+		{
+			"test_number": 8,
+			"test_description": "POST Request: Create User Without Data",
+			"request_type": "POST",
+			"endpoint": "/users",
+			"request_body": {},
+			"expected_status_code": 201,
+			"expected_response_body": {
+				"id": {
+					"$exists": true
+				},
+				"createdAt": {
+					"$exists": true
+				}
+			}
+		},
+		{
+			"test_number": 9,
+			"test_description": "PUT Request: Update user",
+			"request_type": "PUT",
+			"endpoint": "/users/{userId}",
+			"url_parameters": {
+				"userId": "localStorage.getItem('createdUserId')"
+			},
+			"request_body": {
+				"name": "ApiData.newName",
+				"job": "ApiData.newJob"
+			},
+			"expected_status_code": 200,
+			"expected_response_body": {
+				"name": "ApiData.newName",
+				"job": "ApiData.newJob"
+			}
+		},
+		{
+			"test_number": 10,
+			"test_description": "PATCH Request: Patch User",
+			"request_type": "PATCH",
+			"endpoint": "/users/{userId}",
+			"url_parameters": {
+				"userId": "localStorage.getItem('createdUserId')"
+			},
+			"request_body": {
+				"job": "ApiData.updatedJob"
+			},
+			"expected_status_code": 200,
+			"expected_response_body": {
+				"job": "ApiData.updatedJob"
+			}
+		},
+		{
+			"test_number": 11,
+			"test_description": "DELETE Request: Delete User",
+			"request_type": "DELETE",
+			"endpoint": "/users/{userId}",
+			"url_parameters": {
+				"userId": "localStorage.getItem('createdUserId')"
+			},
+			"expected_status_code": 204
+		},
+		{
+			"test_number": 12,
+			"test_description": "POST Request: Register User Successful",
+			"request_type": "POST",
+			"endpoint": "/register",
+			"request_body": {
+				"email": "ApiData.email",
+				"password": "ApiData.password"
+			},
+			"expected_status_code": 200,
+			"expected_response_body": {
+				"id": {
+					"$exists": true
+				},
+				"token": {
+					"$exists": true
+				}
+			}
+		},
+		{
+			"test_number": 13,
+			"test_description": "POST Request: Register Unsuccessful <Without Password>",
+			"request_type": "POST",
+			"endpoint": "/register",
+			"request_body": {
+				"email": "ApiData.email"
+			},
+			"expected_status_code": 400,
+			"expected_response_body": {
+				"error": {
+					"$exists": true
+				}
+			}
+		},
+		{
+			"test_number": 14,
+			"test_description": "POST Request: Register Unsuccessful <Without email>",
+			"request_type": "POST",
+			"endpoint": "/register",
+			"request_body": {
+				"password": "ApiData.password"
+			},
+			"expected_status_code": 400,
+			"expected_response_body": {
+				"error": {
+					"$exists": true
+				}
+			}
+		},
+		{
+			"test_number": 15,
+			"test_description": "POST Request: Register Unsuccessful <Without any details>",
+			"request_type": "POST",
+			"endpoint": "/register",
+			"request_body": {},
+			"expected_status_code": 400,
+			"expected_response_body": {
+				"error": {
+					"$exists": true
+				}
+			}
+		},
+		{
+			"test_number": 16,
+			"test_description": "POST Request: Register Unsuccessful <Using Symbols>",
+			"request_type": "POST",
+			"endpoint": "/register",
+			"request_body": {
+				"email": "ApiData.symbol",
+				"password": "ApiData.symbol"
+			},
+			"expected_status_code": 400,
+			"expected_response_body": {
+				"error": {
+					"$exists": true
+				}
+			}
+		},
+		{
+			"test_number": 17,
+			"test_description": "POST Request: Login User Success",
+			"request_type": "POST",
+			"endpoint": "/login",
+			"request_body": {
+				"email": "ApiData.email",
+				"password": "ApiData.password"
+			},
+			"expected_status_code": 200
+		},
+		{
+			"test_number": 18,
+			"test_description": "POST Request: Login User Rejected <Without password>",
+			"request_type": "POST",
+			"endpoint": "/login",
+			"request_body": {
+				"email": "ApiData.email"
+			},
+			"expected_status_code": 400,
+			"expected_response_body": {
+				"error": {
+					"$exists": true
+				}
+			}
+		},
+		{
+			"test_number": 19,
+			"test_description": "POST Request: Login User Rejected <Without email>",
+			"request_type": "POST",
+			"endpoint": "/login",
+			"request_body": {
+				"password": "ApiData.password"
+			},
+			"expected_status_code": 400,
+			"expected_response_body": {
+				"error": {
+					"$exists": true
+				}
+			}
+		},
+		{
+			"test_number": 20,
+			"test_description": "POST Request: Login User Rejected <Without any details>",
+			"request_type": "POST",
+			"endpoint": "/login",
+			"request_body": {},
+			"expected_status_code": 400,
+			"expected_response_body": {
+				"error": {
+					"$exists": true
+				}
+			}
+		},
+		{
+			"test_number": 21,
+			"test_description": "POST Request: Login User Rejected <Using Symbols>",
+			"request_type": "POST",
+			"endpoint": "/login",
+			"request_body": {
+				"email": "ApiData.symbol",
+				"password": "ApiData.symbol"
+			},
+			"expected_status_code": 400,
+			"expected_response_body": {
+				"error": {
+					"$exists": true
+				}
+			}
+		},
+		{
+			"test_number": 22,
+			"test_description": "GET Request: Get Users with Delay",
+			"request_type": "GET",
+			"endpoint": "/users/delay",
+			"request_parameters": {
+				"delaySeconds": "ApiData.delaySeconds"
+			},
+			"expected_status_code": 200
+		}
+	]
+}

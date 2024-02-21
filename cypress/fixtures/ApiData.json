@@ -6,6 +6,7 @@
     "updatedJob":"QA Updated",
     "email": "eve.holt@reqres.in",
     "password": "pistol",
+    "symbol":"@",
     "pageID": 2,
     "invalidID" :3000,
     "unknownValidID":2,
