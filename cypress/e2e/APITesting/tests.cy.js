@@ -10,7 +10,7 @@ describe('API Testing',()=>{
         methodObj.listUsersByPage(ApiData.pageID).then((response)=>{
             expect(response.status).to.eq(200);
             expect(response.body).to.not.be.null
-            expect(response.body.data)
+            expect(response.body).to.have.property("data")
             expect(response.body.page).to.eq(ApiData.pageID);
         })
     })
