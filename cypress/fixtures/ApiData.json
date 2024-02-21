@@ -1,0 +1,15 @@
+{
+    "name": "Shivendra",
+    "job":"QA",
+    "newName":"Shivendra Pratap",
+    "newJob":"QA New",
+    "updatedJob":"QA Updated",
+    "email": "eve.holt@reqres.in",
+    "password": "pistol",
+    "pageID": 2,
+    "invalidID" :3000,
+    "unknownValidID":2,
+    "unknownInValidID":300,
+    "delaySeconds":3
+
+}

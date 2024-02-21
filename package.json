@@ -1,0 +1,14 @@
+{
+  "name": "apiassignment",
+  "version": "1.0.0",
+  "description": "Assignment For Api Testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Shivendra",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress-mochawesome-reporter": "^3.8.1"
+  }
+}
