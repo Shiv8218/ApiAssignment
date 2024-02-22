@@ -25,7 +25,7 @@ To get started with our framework, follow these steps:
 
 Install dependencies by running the following command:
 
-```terminal
+terminal
 npm install
 
 Launch the Cypress UI:
