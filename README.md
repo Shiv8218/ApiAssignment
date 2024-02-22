@@ -1,48 +1,74 @@
-# Cypress API Testing Project
+## Cypress Automated Testing Framework
 
-This project automates the testing of APIs using Cypress, focusing on endpoints provided by Reqres.
+# Overview
+This framework is built to streamline end-to-end testing using Cypress, providing a structured approach for scalable and maintainable test suites.
 
-## Overview
+# Table of Contents
+Features
+Prerequisites
+Getting Started
+Project Structure
+Running Tests
+Configuration
 
-The goal of this project is to ensure the reliability and accuracy of the APIs provided by Reqres. The tests cover various scenarios including positive, negative, and edge cases to validate the functionality and behavior of the API endpoints.
+# Features
+Page Object Model (POM): Leverage the power of the Page Object Model to organize your tests systematically, enhancing maintainability and reusability.
+Test Data Handling: Effectively manage test data to ensure the creation of a robust and scalable test suite.
 
-## Features
-Comprehensive test coverage of API endpoints.
-Automated testing with Cypress, a powerful testing framework.
-Detailed test plan and documentation for easy reference and maintenance.
+# Prerequisites
+Before diving in, please ensure you have the following prerequisites met:
 
-## Prerequisites
-Before running the tests, ensure you have the following installed:
+Node.js installed locally on your machine.
 
-Node.js (with npm)
-Cypress
+# Getting Started
+To get started with our framework, follow these steps:
 
-## Installation
-1. Clone the repository:
-git clone <repository_url>
+Install dependencies by running the following command:
 
-2. Navigate to the project directory:
-cd cypress-api-testing
-
-3. Install dependencies:
+terminal
 npm install
 
+Launch the Cypress UI:
 
-## Project Structure
+terminal
+npx cypress open
+
+# Project Structure
+Here's the structure of our Cypress project:
+
+plaintext
 cypress/
-  ├── fixtures/            # Test data files
-  ├── e2e/                 # Test scripts
-  ├── ApiMethods           # API Request Methods
-  ├── support/             # Custom commands and utilities & Pages
-  └── reports/             # Reports 
+  ├── fixtures/            # Holds test data files
+  ├── e2e/                 # Contains test scripts
+  ├── support/             # Custom commands, utilities, and Pages
+  └── reports/             # Stores test reports
 
+# Running Tests
+Execute tests in different modes:
 
-## Running Tests
- Execute all tests in Headless Mode:
- npx cypress run
- Execute all tests in Headed Mode:
- npx cypress run --headed
+To run all tests in Headless Mode:
 
+terminal
+npx cypress run
+To run all tests in Headed Mode:
 
-## Test Plan
-The test plan is documented in JSON format and can be found in the project directory as testPlan.json. It outlines the test scenarios and cases for each API endpoint covered in the project.
+terminal
+npx cypress run --headed
+To execute all tests and generate a report:
+
+terminal
+npm run test
+To run API tests and generate a report:
+
+terminal
+npm run testApi
+
+# Configuration
+Configure the Base URL:
+
+- Navigate to cypress.config.js and update the baseUrl inside the e2e section with your desired base URL.
+Activate/Deactivate Test Isolation:
+
+- Modify the test isolation setting in cypress.config.js as follows:
+To Activate: testIsolation: true,
+To Deactivate: testIsolation: false,
